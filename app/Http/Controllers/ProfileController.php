@@ -50,6 +50,7 @@ class ProfileController extends Controller
         $client->email = $validatedData['email'];
         $client->password = bcrypt($validatedData['password']);
         $client->photo_path = $imagePath; // Chemin de l'image
+        $client->password_length = strlen($validatedData['password']);
 
         // Sauvegarde du client dans la base de données
         $client->save();

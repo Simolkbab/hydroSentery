@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Client;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 
 
@@ -110,6 +111,37 @@ public function updateEmail(Request $request)
 }
 
 
+public function editNom()
+{
+    return view('profile.editNom');
+}
+
+
+public function updateNom(Request $request)
+{
+    $user = Auth::guard('client')->user();
+
+
+
+    $validator = Validator::make($request->all(), [
+        'nomClient' => [
+            'required',
+            Rule::unique('clients')->ignore($user->nomClient, 'nomClient'),
+        ],
+    ]);
+
+    if ($validator->fails()) {
+        return redirect()->back()->withErrors($validator)->withInput();
+    }
+
+    $user->nomClient = $request->nomClient;
+    $user->save();
+
+    return redirect()->route('show')->with('success', 'E-mail mis à jour avec succès.');
+}
+
+
+
 public function editTelephone()
 {
     return view('profile.ediTelephone');
@@ -151,22 +183,28 @@ public function updatePassword(Request $request)
 {
     $user = Auth::guard('client')->user();
 
-  
-    // Valider les données du formulaire
     $validator = Validator::make($request->all(), [
-        'password' => 'required|min:6', // Exemple de règle de validation pour le mot de passe
+        'password' => 'required|string',
+        'new_password' => 'required|string|confirmed|min:4',
     ]);
 
-    if ($validator->fails()) {
-        return redirect()->back()->withErrors($validator)->withInput();
+    $validator = Validator::make($request->all(), [
+        'password' => 'required|string',
+        'new_password' => 'required|string|confirmed|min:4',
+    ]);
+
+    // Vérification de l'ancien mot de passe
+    if (!Hash::check($request->password, $user->password)) {
+        return redirect()->back()->withErrors(['password' => 'Le mot de passe actuel est incorrect.'])->withInput();
+       
     }
 
-    // Mettre à jour le mot de passe du client
-    $user->password = bcrypt($request->password); // Assurez-vous de hasher le mot de passe
+    $user->password = Hash::make($request->new_password);
     $user->save();
 
     return redirect()->route('show')->with('success', 'Mot de passe mis à jour avec succès.');
 }
+
 
 
 }

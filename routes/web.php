@@ -24,9 +24,12 @@ Route::middleware('auth:client')->group(function () {
     Route::get('/notification', [NotificationsController::class, 'index'])->name('notification');
     Route::get('/profile', [Profile_siteController::class, 'show'])->name('show');
     Route::get('/editEmail', [Profile_siteController::class,'editEmail'])->name('editEmail');
+    Route::get('/editNom', [Profile_siteController::class,'editNom'])->name('editNom');
     Route::get('/ediTelephone', [Profile_siteController::class,'editTelephone'])->name('ediTelephone');
     Route::get('/editPassword', [Profile_siteController::class,'editPassword'])->name('editPassword');
     Route::patch('/UpdateEmail', [Profile_siteController::class,'updateEmail'])->name('updateEmail');
+    Route::patch('/UpdateNom', [Profile_siteController::class,'UpdateNom'])->name('UpdateNom');
+
     Route::patch('/UpdateTelephone', [Profile_siteController::class,'updateTelephone'])->name('updateTelephone');
     Route::patch('/UpdatePassword', [Profile_siteController::class,'updatePassword'])->name('updatePassword');
     Route::delete('/delete-profile-image', [Profile_siteController::class,'deleteProfileImage'])->name('delete-profile-image');

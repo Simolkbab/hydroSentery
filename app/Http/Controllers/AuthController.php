@@ -13,7 +13,6 @@ class AuthController extends Controller
 {
     public function showLoginForm()
     {
-        
         return view('authentification.login');
     }
 
@@ -35,7 +34,7 @@ class AuthController extends Controller
             return redirect()->intended('/home');
         } else {
             // Authentification échouée, rediriger avec un message d'erreur
-            return redirect()->back()->withErrors(['error' => 'Identifiants incorrects'])->withInput($request->only('client_id'));
+            return redirect()->back()->withErrors(['error' => "Le nom d'utilisateur ou le mot de passe est incorrect."])->withInput($request->only('client_id'));
         }
         
         

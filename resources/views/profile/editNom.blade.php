@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modifier le mot de passe</title>
+    <title>Modifier nom de client</title>
     <style>
         /* Basic styles for a clean and modern look */
 body {
@@ -22,9 +22,7 @@ label {
   margin-bottom: 5px;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="password"] { /* Target all three input types */
+input[type="text"] {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
@@ -56,10 +54,10 @@ form {
 }
 
     </style>
-
+    
 </head>
 <body>
-    <h1>Modifier le mot de passe</h1>
+    <h1>Modifier le nom de Client</h1>
     @if ($errors->any())
         <div>
             <ul>
@@ -69,18 +67,12 @@ form {
             </ul>
         </div>
     @endif
-    <form action="{{ route('updatePassword') }}" method="POST">
-      @csrf
-      @method('PATCH')
-      <label for="password">Ancien mot de passe :</label>
-      <input type="password" id="password" name="password">
-      <label for="new_password">Nouveau mot de passe :</label>
-      <input type="password" id="new_password" name="new_password">
-      <label for="new_password_confirmation">Confirmez le nouveau mot de passe :</label>
-      <input type="password" id="new_password_confirmation" name="new_password_confirmation">
-      <button type="submit">Mettre à jour</button>
-  </form>
-  
-    
+    <form action="{{ route('UpdateNom') }}" method="POST">
+        @csrf
+        @method('Patch')
+        <label for="nom">Nouvel nom :</label>
+        <input type="text" id="nom" name="nomClient" value="{{ old('nomClient') }}">
+        <button type="submit">Mettre à jour</button>
+    </form>
 </body>
 </html>

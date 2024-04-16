@@ -79,7 +79,7 @@
     </nav>
     <section class="body">
        
-    <h1 class="pro"><span class="ph">photo de</span> profil</h1>
+    <h1 class="pro"><span class="ph">Votre</span> Profil</h1>
   <main>
     <section class="photo-profil">
         <img src="{{ asset('storage/' . $user->photo_path) }}" id="profile-image" alt="Photo de profil">
@@ -124,15 +124,19 @@
         <hr>
         <li>
             
-          <label for="identifiant">Nom d'utilisateur (IDCLIENT)</label>
-          <input type="text" id="identifiant" value="{{ $user->client_id }}">
-          <button id="modifier-identifiant" disabled>non cliquable</button>
+          <label for="identifiant">Nom de Client</label>
+          <input type="text" id="identifiant" value="{{ $user->nomClient }}">
+          <button id="modifier-identifiant" ><a href="{{ route('editNom') }}">Modifier</a></button>
         </li>
         <hr>
         <li>
+          
+             
+            
             <label for="password">mot de passe</label>
-            <input type="password" id="password" value="{{ $user->password }}">
-            <button id="modifier-password"><a href="{{ route('editPassword') }}">Modifier</a></button>        </li>
+            <input    id="password-stars">{{ str_repeat("*", ($user->password_length)) }}
+            <button id="modifier-password"><a href="{{ route('editPassword') }}">Modifier</a></button>
+        </li>
       </ul>
     </section>
   </main>
