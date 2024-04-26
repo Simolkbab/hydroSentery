@@ -1,0 +1,134 @@
+body{
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: sans-serif;
+    margin: 0;
+    height: 100vh;
+    /*background: linear-gradient(to right, #070c29, #081351, #1730c1);*/
+    background: url("../images/pic.png") no-repeat center / cover;
+    background-size: 100%;
+}
+*{
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.main{
+    width: 600px;
+    height: 670px;
+    overflow: hidden;
+    /*background: linear-gradient(to right, #6d9176, #b1cab9, #bfc6c3);*/
+    border-radius: 10px;
+    box-shadow: 5px 20px 50px #000;
+    justify-content: center; /* Centrer horizontalement */
+    align-items: center; /* Centrer verticalement */
+    margin: 0 auto;  /*Pour centrer horizontalement par rapport à la page */
+    margin-top: 10px;
+    position: fixed;
+    top: 0;
+    left:30%;
+    border: 2px solid rgba(255,255,255, .2);
+    box-shadow: 0 0 10px rgba(0,0,0, .2);
+    backdrop-filter: blur(50px);
+    border-radius: 10px;
+    color: #000;
+}
+.signup{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.title{
+    
+    font-size: 2.3em;
+    justify-content: center;
+    text-align: center;
+    display: flex;
+    margin: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .5s ease-in-out;
+    color: rgb(34, 58, 95);
+    text-shadow: 0 0 20px #000;
+}
+input{
+    width: 60%;
+    height: 40px;
+    background: #f2f2f25d;
+    justify-content: center;
+    display: flex;
+    margin: 20px auto;
+    padding: 10px;
+    border: 6px outset #000;
+    outline: none;
+    border-radius: 5px;
+
+}
+.signup div label{
+    padding-left: 20px;
+    margin-left: 100px;
+    font-weight:600 ;
+
+}
+.GoProfil a{
+    text-decoration: none;
+    color: #fff;
+    font-size: 20px;
+}
+.GoProfil{
+    margin: 10px;
+    border-radius: 5px;
+    border:2px solid #000;
+    width: 250px;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 10px;
+    background: #000;
+    box-shadow:  5px 10px 10px #1a1a1a;
+    
+}
+.GoProfil:hover{
+    background: #2f2e30;
+}
+.GoProfil a i {
+    margin-right: 10px; /* Ajoute un espace de 10px entre l'icône et le texte */
+}
+.erreur , .signup p{
+    border-radius: 5px;
+    
+    width: 80%;
+    text-align: center;
+    color: red;
+    font-size: 20px;
+    font-weight: 600;
+    margin-left: 60px;
+    margin-top: 25px;
+    list-style-type: none;
+}
+button{
+    width: 60%;
+    height: 40px;
+    margin: 10px auto;
+    justify-content: center;
+    display: block;
+    color: #fff;
+    background: #000;
+    box-shadow: 5px 20px 50px #000;
+    font-size: 1em;
+    font-weight: bold;
+    margin-top: 40px;
+    outline:none;
+    border: none;
+    border-radius: 5px;
+    transition: .2s ease-in;
+    cursor: pointer;
+}
+button:hover{
+    background:#2f2e30 ;
+}

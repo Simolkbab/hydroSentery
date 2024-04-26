@@ -24,8 +24,6 @@ class Profile_siteController extends Controller
             return view('profile.profile', ['user' => $user, 'photoPath' => $photoPath]);
        
     }
-    
-
     public function deleteProfileImage(Request $request)
     {
         $user = auth()->guard('client')->user();
@@ -88,92 +86,98 @@ class Profile_siteController extends Controller
 
 public function updateEmail(Request $request)
 {
-    $user = Auth::guard('client')->user();
-
-
-
-    $validator = Validator::make($request->all(), [
-        'email' => [
-            'required',
-            'email',
-            Rule::unique('clients')->ignore($user->client_id, 'client_id'),
-        ],
+    $request->validate([
+        'password' => 'required',
+        'current_email' => 'required|email',
+        'email' => 'required|email|unique:clients,email',
+        'confirm_email' => 'required|same:email',
     ]);
 
-    if ($validator->fails()) {
-        return redirect()->back()->withErrors($validator)->withInput();
+    $user = Auth::user();
+
+    // Vérifie si le mot de passe actuel est correct
+    if (!\Hash::check($request->password, $user->password)) {
+        return redirect()->back()->with('error', 'Mot de passe incorrect.');
     }
 
+    // Vérifie si l'ancien e-mail correspond à celui dans la base de données
+    if ($request->current_email !== $user->email) {
+        return redirect()->back()->with('error', 'L\'ancien e-mail est incorrect.');
+    }
+
+    // Met à jour l'e-mail de l'utilisateur
     $user->email = $request->email;
     $user->save();
 
-    return redirect()->route('show')->with('success', 'E-mail mis à jour avec succès.');
-}
+    return redirect()->back()->with('success', 'Adresse e-mail mise à jour avec succès.');
 
+}
 
 public function editNom()
 {
     return view('profile.editNom');
 }
-
-
 public function updateNom(Request $request)
 {
-    $user = Auth::guard('client')->user();
-
-
-
-    $validator = Validator::make($request->all(), [
-        'nomClient' => [
-            'required',
-            Rule::unique('clients')->ignore($user->nomClient, 'nomClient'),
-        ],
+    $request->validate([
+        'password' => 'required',
+        'current_name' => 'required|string',
+        'nomClient' => 'required|string|unique:clients,nomClient',
+        'confirm_name' => 'required|same:nomClient',
     ]);
 
-    if ($validator->fails()) {
-        return redirect()->back()->withErrors($validator)->withInput();
+    $user = Auth::user();
+
+    // Vérifie si le mot de passe actuel est correct
+    if (!\Hash::check($request->password, $user->password)) {
+        return redirect()->back()->with('error', 'Mot de passe incorrect.');
     }
 
+    // Vérifie si l'ancien nom de téléphone correspond à celui dans la base de données
+    if ($request->current_name !== $user->nomClient) {
+        return redirect()->back()->with('error', 'L\'ancien nom  est incorrect.');
+    }
+
+    // Met à jour le nom  de l'utilisateur
     $user->nomClient = $request->nomClient;
     $user->save();
 
-    return redirect()->route('show')->with('success', 'E-mail mis à jour avec succès.');
+    return redirect()->back()->with('success', 'nom mis à jour avec succès.');
 }
-
-
 
 public function editTelephone()
 {
     return view('profile.ediTelephone');
 }
 
-
-
 public function updateTelephone(Request $request)
 {
-    $user = Auth::guard('client')->user();
 
-
-
-    // Valider les données du formulaire
-    $validator = Validator::make($request->all(), [
-        'telephone' => 'required|numeric', // Exemple de règle de validation pour le numéro de téléphone
+    $request->validate([
+        'password' => 'required',
+        'current_phone' => 'required|numeric',
+        'telephone' => 'required|numeric|unique:clients,telephone',
+        'confirm_phone' => 'required|same:telephone',
     ]);
 
-    if ($validator->fails()) {
-        return redirect()->back()->withErrors($validator)->withInput();
+    $user = Auth::user();
+
+    // Vérifie si le mot de passe actuel est correct
+    if (!\Hash::check($request->password, $user->password)) {
+        return redirect()->back()->with('error', 'Mot de passe incorrect.');
     }
 
-    // Mettre à jour le numéro de téléphone du client
+    // Vérifie si l'ancien numéro de téléphone correspond à celui dans la base de données
+    if ($request->current_phone !== $user->telephone) {
+        return redirect()->back()->with('error', 'L\'ancien numéro de téléphone est incorrect.');
+    }
+
+    // Met à jour le numéro de téléphone de l'utilisateur
     $user->telephone = $request->telephone;
     $user->save();
 
-
-    return redirect()->route('show')->with('success', 'Numéro de téléphone mis à jour avec succès.');
+    return redirect()->back()->with('success', 'Numéro de téléphone mis à jour avec succès.');
 }
-
-
-
 
 public function editPassword()
 {
@@ -181,30 +185,22 @@ public function editPassword()
 }
 public function updatePassword(Request $request)
 {
-    $user = Auth::guard('client')->user();
-
-    $validator = Validator::make($request->all(), [
-        'password' => 'required|string',
-        'new_password' => 'required|string|confirmed|min:4',
+    $request->validate([
+        'current_password' => 'required',
+        'password' => 'required|min:8|confirmed', 
     ]);
-
-    $validator = Validator::make($request->all(), [
-        'password' => 'required|string',
-        'new_password' => 'required|string|confirmed|min:4',
-    ]);
-
-    // Vérification de l'ancien mot de passe
-    if (!Hash::check($request->password, $user->password)) {
-        return redirect()->back()->withErrors(['password' => 'Le mot de passe actuel est incorrect.'])->withInput();
-       
+    
+    $user = Auth::user();
+    
+    
+    if (!\Hash::check($request->current_password, $user->password)) {
+        return redirect()->back()->with('error', 'Mot de passe incorrect.');
     }
-
-    $user->password = Hash::make($request->new_password);
+    
+    
+    $user->password = Hash::make($request->password);
     $user->save();
-
-    return redirect()->route('show')->with('success', 'Mot de passe mis à jour avec succès.');
+    
+    return redirect()->back()->with('success', 'Mot de passe mis à jour avec succès.');
 }
-
-
-
 }

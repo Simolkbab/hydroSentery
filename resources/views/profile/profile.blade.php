@@ -1,163 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>HydroSentry</title>
-        <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
-        <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
-        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
-    </head>
-<body >
 
-    <nav class="sidebar ">
-        <header>
-            <div class="image-text">
-                <span class="image">
-                    <img src="{{ asset('images/logo.png') }}" alt="logo">
-                </span>
-                <div class="text header-text">
-                    <span class="name"><h1>HydroSentry</h1></span>
-                </div>
-            </div>
-        </header>
-        <div class="menu-bar">
-            <div class="menu">
-                <ul class="menu-links">
-                    <li class="nav-link"> 
-                            <a href="{{ route('index') }}" >
-                                <i class='bx bxs-home icon' ></i> 
-                                <span class="text nav-text ">Home</span>
-                            </a>
-                    </li>
-                    <li class="nav-link">
-                        <a href="{{ route('consult') }}">
-                            <i class='bx bxs-data icon' ></i>
-                            <span class="text nav-text"> Visualisée Données</span>
-                        </a>
-                    </li>
-                    <li class="nav-link">
-                        <a href="{{ route('history') }}">
-                            <i class='bx bx-history icon' ></i>
-                            <span class="text nav-text">Consulter Historique</span>
-                        </a>
-                    </li>
-                    <li class="nav-link">
-                        <a href="{{ route('show') }}" class="profile">
-                            <i class='bx bxs-user icon' ></i>
-                            <span class="text nav-text">Profil utilisateur</span>
-                        </a>
-                    </li>
-                    <li class="nav-link">
-                        <a href="{{ route('notification') }}">
-                            <i class='bx bxs-bell icon' ></i>
-                            <span class="text nav-text">Notification</span>
-                        </a>
-                    </li>
-                    <li class="nav-link">
-                        <a href="AI-RS.pdf" download="file.pdf">
-                            <i class='bx bxs-file-doc icon' ></i>
-                            <span class="text nav-text">Guide</span>
-                        </a>
-                    </li>
-                    
-                </ul>
-            </div>
-            <div class="bottom-content">
-                <li class="">
-                    <a href="#" onclick="confirmLogout()">
-                        <i class='bx bx-log-out icon'></i>
-                        <span class="text nav-text">Déconnexion</span>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HydroSentry</title>
+    <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
+    <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
+</head>
+
+<body>
+    <!-- =============== Navigation ================ -->
+    <div class="container">
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <img src="{{ asset('images/logo.png') }}" width="70px" >
+                        </span>
+                        <span class="title title0" >HydroSentry</span>
                     </a>
                 </li>
-            </div>
+
+                <li>
+                    <a href="{{ route('index') }}" >
+                        <span class="icon "><ion-icon name="home-outline"></ion-icon></span>
+                        <span class="title">Accueil</span>
+                        
+
+                    </a>
+                </li>
+                <li class="pg1">
+                    <a href="{{ route('consult') }}">
+                        <span class="icon"><ion-icon name="server-outline"></ion-icon></span>
+                        <span class="title">Visualisée Données</span>
+                        
+
+                    </a>
+                </li>
+                <li class="pg1">
+                    <a href="{{ route('history') }}">
+                        <span class="icon"><ion-icon name="timer-outline"></ion-icon></span>
+                        <span class="title">Consulter Historique</span>
+                        
+
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('show') }}" class="home">
+                        <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
+                        <span class="title">Profil utilisateur</span>
+                        
+
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('notification') }}">
+                        <span class="icon"><ion-icon name="notifications-outline"></ion-icon></span>
+                        <span class="title">Notification</span>
+                        
+
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="AI-RS.pdf" download="file.pdf">
+                        <span class="icon"><ion-icon name="document-attach-outline"></ion-icon></span>
+                        <span class="title">Guide</span>
+                        
+
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="confirmLogout()">
+                        <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
+                        <span class="title">Déconnexion</span>
+                        
+
+                    </a>
+                </li>
+            </ul>
         </div>
-        
-    </nav>
-    <section class="body">
-       
-    <h1 class="pro"><span class="ph">Votre</span> Profil</h1>
-  <main>
-    <section class="photo-profil">
-        <img src="{{ asset('storage/' . $user->photo_path) }}" id="profile-image" alt="Photo de profil">
-        <div class="button-container">
-            <form id="delete-profile-image-form" action="{{ route('delete-profile-image') }}" method="POST">
-                @csrf
-                @method('DELETE')
-                <button type="button" id="supprimer-photo" onclick="confirmDelete()">Supprimer la photo</button>
-            </form>
-            <div>
-                <form id="update-profile-image-form" action="{{ route('update-profile-image') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    @method('PATCH')
-                    <input type="file" name="profile_image" accept="image/*" id="profile-image-input">
-                </form>
-                @error('profile_image')
-                <p class="error-message">
-                    {{ $message }}
-                </p>
+
+        <!-- ========================= Main ==================== -->
+        <div class="main">
+            <div class="topbar">
+                <div class="toggle">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </div>
             </div>
-           
-            @enderror
-        </div>
-    </section>
-    
-    
-   
-    <section class="informations">
-      <ul>
-        <hr>
-        <li>
-          <label for="email">Adresse mail</label>
-          <input type="email" id="email" value="{{ $user->email }}">
-          <button id="modifier-email"> <a href="{{ route('editEmail') }}">Modifier</a></button>
-        </li>
-        <hr>
-        <li>
-          <label for="telephone">Numéro de téléphone</label>
-          <input type="tel" id="telephone" value="{{ $user->telephone }}">
-          <button id="modifier-telephone"><a href="{{ route('ediTelephone') }}">Modifier</a></button>
-        </li>
-        <hr>
-        <li>
-            
-          <label for="identifiant">Nom de Client</label>
-          <input type="text" id="identifiant" value="{{ $user->nomClient }}">
-          <button id="modifier-identifiant" ><a href="{{ route('editNom') }}">Modifier</a></button>
-        </li>
-        <hr>
-        <li>
-          
-             
-            
-            <label for="password">mot de passe</label>
-            <input    id="password-stars">{{ str_repeat("*", ($user->password_length)) }}
-            <button id="modifier-password"><a href="{{ route('editPassword') }}">Modifier</a></button>
-        </li>
-      </ul>
-    </section>
-  </main>
-    </section>
-   
+
+            <!-- ======================= Cards ================== -->
+           <div class="section_white" >
+
+            <h1 class="pro"><span class="ph">Votre</span> Profil</h1>
+            <main class="main_white">
+                <section class="photo-profil">
+                    <img src="{{ asset('storage/' . $user->photo_path) }}" id="profile-image" alt="Photo de profil">
+                    <div class="button-container">
+                        <form id="delete-profile-image-form" action="{{ route('delete-profile-image') }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="button" id="supprimer-photo" onclick="confirmDelete()">Supprimer la photo</button>
+                        </form>
+                        <div>
+                            <form id="update-profile-image-form" action="{{ route('update-profile-image') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                @method('PATCH')
+                                <input type="file" name="profile_image"  accept="image/*" id="profile-image-input">
+                            </form>
+                            @error('profile_image')
+                            <p class="error-message">
+                                {{ $message }}
+                            </p>
+                        </div>
+                        @enderror
+                    </div>
+                </section>
+                <section class="informations">
+                    <ul>
+                        <hr>
+                        <li>
+                            <label for="email">Adresse mail</label>
+                            <p id="email" class="content">{{ $user->email }}</p>
+                            <button id="modifier-email" class="buttons"> <a href="{{ route('editEmail') }}"><b>Modifier</b></a></button>
+                        </li>
+                        <hr>
+                        <li>
+                            <label for="telephone">Numéro de téléphone</label>
+                            <p id="telephone" class="content">{{ $user->telephone }}</p>
+                            <button id="modifier-telephone" class="buttons"><a href="{{ route('ediTelephone') }}"><b>Modifier</b></a></button>
+                        </li>
+                        <hr>
+                        <li> 
+                            <label for="identifiant">Nom de Client</label>
+                            <p id="identifiant" class="content">{{ $user->nomClient }}</p>
+                            <button id="modifier-identifiant" class="buttons"><a href="{{ route('editNom') }}"><b>Modifier</b></a></button>
+                        </li>
+                        <hr>
+                        <li> 
+                            <label for="password">mot de passe</label>
+                            <p  id="password-stars" class="content">{{ str_repeat("*", ($user->password_length)) }}</p>
+                            <button id="modifier-password" class="buttons"><a href="{{ route('editPassword') }}"><b>Modifier</b></a></button>
+                        </li>
+                        <hr>
+                    </ul>
+                </section>
+            </main>
+                    
+           </div>
+
+                
+         </div>
+    </div>
+
+    <!-- =========== Scripts =========  -->
+    <script src="{{ asset('assets/js/main.js') }}"></script>    <script>
+        document.getElementById('profile-image-input').addEventListener('change', function() {
+            document.getElementById('update-profile-image-form').submit();
+        });
+
+        function confirmLogout() {
+            if (confirm("Are you sure you want to log out?")) {
+                window.location.href = "{{ route('logout') }}";
+            }
+        }
+        function confirmDelete() {
+            if (confirm("Are you sure you want to delete the profile image?")) {
+                document.getElementById('delete-profile-image-form').submit();
+            }
+        }
+    </script>
+
+    <!-- ====== ionicons ======= -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 
-<script>
-    document.getElementById('profile-image-input').addEventListener('change', function() {
-        document.getElementById('update-profile-image-form').submit();
-    });
-
-    function confirmLogout() {
-        if (confirm("Are you sure you want to log out?")) {
-            window.location.href = "{{ route('logout') }}";
-        }
-    }
-    function confirmDelete() {
-        if (confirm("Are you sure you want to delete the profile image?")) {
-            document.getElementById('delete-profile-image-form').submit();
-        }
-    }
-</script>
 </html>
