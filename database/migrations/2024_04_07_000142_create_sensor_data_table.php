@@ -13,12 +13,10 @@ return new class extends Migration
     {
         Schema::create('sensor_data', function (Blueprint $table) {
             $table->id();
-            $table->string('id_capteur');
-            $table->double('value');
+            $table->double('debit'); // Ajout du champ 'debit'
             $table->timestamps();
         
             // Définir la contrainte de clé étrangère
-            $table->foreign('id_capteur')->references('id_capteur')->on('sensors')->onDelete('cascade');
         });
     }
 

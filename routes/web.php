@@ -8,14 +8,13 @@ use App\Http\Controllers\Profile_siteController;
 use App\Http\Controllers\ConsultController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\NotificationsController;
-
 Route::middleware('auth:client')->group(function () {
     // Routes accessible only to authenticated users
-    
 
     Route::view('/message', 'profile.message')->name('message');
     Route::get('/home', [HomeController::class, 'index'])->name('index');
     Route::get('/consult', [ConsultController::class, 'index'])->name('consult');
+   
 
     // Route pour afficher l'historique
     Route::get('/history', [HistoryController::class, 'index'])->name('history');
@@ -38,7 +37,11 @@ Route::middleware('auth:client')->group(function () {
     Route::get('/logout',[AuthController::class,'logout'])->name('logout');
 });
 
-
+Route::get("/", function () {
+    if (!auth()->check()) {
+        return redirect('/login');
+    } 
+})->middleware('guest');
 
 
 Route::middleware('guest:client')->group(function () {
@@ -47,3 +50,22 @@ Route::middleware('guest:client')->group(function () {
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [AuthController::class, 'login']);
 });
+
+
+
+// Route::post('/store-data', function(Request $request)
+// {
+//     // Retrieve data from the incoming request
+//     $data = $request->all();
+
+//     // Process the data as needed
+
+//     // Store the data in a file
+
+
+
+//     $filePath = storage_path('app/data.json'); 
+//     file_put_contents($filePath, json_encode($data)); 
+
+//     return response()->json(['message' => 'Data stored successfully']);
+// });
