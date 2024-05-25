@@ -11,16 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('clients', function (Blueprint $table) {
+        Schema::create('admins', function (Blueprint $table) {
             $table->id();
-            $table->string('client_id')->unique();
-            $table->string('nomClient');
+            $table->string('name');
+            $table->string('admin_id')->unique();
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('telephone');
-            $table->string('role')->default('client');
-            $table->string('photo_path')->default('profile_photos/default_profile.png');
-            $table->timestamps(); // Optional: Adds created_at and updated_at columns
+            $table->string('role')->default('admin');
+            $table->timestamps();
         });
     }
 
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('clients');
+        Schema::dropIfExists('admins');
     }
 };

@@ -42,7 +42,7 @@
                         
                         <div class="input-box">
                             <span class="icon"><i class='bx bxs-user'></i></span>
-                            <input type="text" name="client_id" placeholder="Nom d'utilisateur" required>
+                            <input type="text" name="user_id" placeholder="Nom d'utilisateur" required>
                         </div>
                        
                         <div class="input-box">

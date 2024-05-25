@@ -9,12 +9,159 @@
     <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
     <link rel="stylesheet" href="{{ asset('css/history.css') }}">
     {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"> --}}
+    <style>
+        .pagination {
+            margin: 40px 0;
+            list-style: none;
+            text-align: center;
+        }
+    
+        .pagination li {
+            display: inline-block;
+            margin-right: 5px;
+        }
+    
+        .pagination li a,
+        .pagination li span {
+            padding: 5px 10px;
+            border: 1px solid #ccc;
+            background-color: #f2f2f2;
+            color: #333;
+            text-decoration: none;
+        }
+    
+        .pagination li.active a,
+        .pagination li.active span {
+            background-color: #007bff;
+            color: #fff;
+        }
+        button {
+        padding: 10px 20px;
+        background-color: #007BFF;
+        color: black;
+        border: 3px solid #ADB2B5;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
 
+    .input-container {
+        display: flex;
+        align-items: center;
+    }
+
+    /* Style for the input */
+    input[type="date"] {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-right: 10px;
+    }
+
+    /* Style for the accompanying text */
+    .filter-text {
+        font-size: 16px;
+        font-weight:bold;
+    }
+    /* Hover effect for the button */
+    button:hover {
+        background-color: #5b8d9f;
+    }
+
+    .input-container {
+        display: flex;
+        align-items: center;
+    }
+
+  
+    /* Style for the input */
+    input[type="date"] {
+       width: 200px;
+       background: #ADB2B5 url("images/calendar.png");
+       background-size: 20px;
+       background-repeat: no-repeat;
+       background-position: 90%;
+        padding: 7px 9px;
+        font-size: 14px;
+        font-weight: 600;
+        border: none;
+        outline: none;
+    }
+   
+    input[type="date"]::-webkit-calendar-picker-indicator{
+        opacity: 0;
+    }
+
+    /* Style for the icon */
+    
+
+
+.histor_auj {
+    width: 100%;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background: #ADB2B5
+}
+.histor_auj1 {
+    width: 95%;
+    overflow: hidden;
+    margin-left: 25px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background: #ADB2B5
+}
+
+.histor_auj table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 4px;
+    padding:  3px;
+    
+}
+.histor_auj1 table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 4px;
+    padding:  3px;
+    
+}
+
+.histor_auj th,
+.histor_auj td {
+    padding: 15px;
+    text-align: center;
+}
+.histor_auj1 th,
+.histor_auj1 td {
+    padding: 15px;
+    text-align: center;
+}
+
+.histor_auj th {
+    background-color: #8ab1da;
+}
+.histor_auj1 th {
+    background-color: #8ab1da;
+}
+
+.histor_auj tbody tr:nth-child(odd) {
+    background-color: #EDF0F2;
+}
+.histor_auj1 tbody tr:nth-child(odd) {
+    background-color: #EDF0F2;
+}
+.histor_auj1 tbody tr:nth-child(even) {
+    background-color: #cbd8e0;
+}
+
+
+    </style>
 </head>
 
 <body>
     <!-- =============== Navigation ================ -->
-    <div class="container">
+    <div class="containerHistory">
         <div class="navigation">
             <ul>
                 <li>
@@ -96,64 +243,110 @@
 
             <!-- ======================= Cards ================== -->
             <div class="section_white">
-                <ul style="list-style-type: none; padding: 0;">
-                    <!-- Display sensor data -->
-                    @forelse ($sensorData as $data)
-                    <li style="margin-bottom: 10px; padding: 10px; background-color: #f9f9f9; border-radius: 5px; box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);">
-                        <span style="display: inline-block; width: 80px; font-weight: bold;">Mesure:</span>
-                        <span style="display: inline-block; width: 100px;">{{ $data->id }}</span>
-                        <span style="display: inline-block; width: 80px; font-weight: bold;">Débit:</span>
-                        <span style="display: inline-block; width: 100px;">{{ $data->debit }}</span>
-                        <span style="display: inline-block; width: 80px; font-weight: bold;">Date:</span>
-                        <span>{{ $data->created_at }}</span>
-                    </li>
-                    @empty
-                    <p style="padding:10px">No sensor data available.</p>
-                    @endforelse
-                </ul>
-            
-                <!-- Pagination links -->
-                @if (!$sensorData->isEmpty())
-                <ul class="pagination" style="list-style: none; display: flex; justify-content: center; padding: 0; margin-top: 20px;">
-                    @if ($sensorData->onFirstPage())
-                    <!-- If on the first page, disable previous button -->
-                    <li class="page-item" style="margin-right: 10px;"><span class="page-link">&laquo;</span></li>
-                    @else
-                    <!-- If not on the first page, show previous button -->
-                    <li class="page-item" style="margin-right: 10px;"><a class="page-link" href="{{ $sensorData->previousPageUrl() }}">&laquo;</a></li>
-                    @endif
-            
-                    <!-- Pagination links -->
-                    @foreach ($sensorData->getUrlRange(1, $sensorData->lastPage()) as $page => $url)
-                    <!-- Highlight current page -->
-                    <li class="page-item {{ $page == $sensorData->currentPage() ? 'active' : '' }}" style="margin-right: 10px;"><a class="page-link" href="{{ $url }}">{{ $page }}</a></li>
-                    @endforeach
-            
-                    @if ($sensorData->hasMorePages())
-                    <!-- If there are more pages, show next button -->
-                    <li class="page-item" style="margin-right: 10px;"><a class="page-link" href="{{ $sensorData->nextPageUrl() }}">&raquo;</a></li>
-                    @else
-                    <!-- If on the last page, disable next button -->
-                    <li class="page-item" style="margin-right: 10px;"><span class="page-link">&raquo;</span></li>
-                    @endif
-                </ul>
-                @endif
-            </div>
-            
-            
+                <div style="padding:20px 25px">
+                    <div style="margin-bottom:10px">
 
+                        <div style="display: flex; justify-content:space-between">
+                           
+                            <button onclick='resetDate()'Style="font-weight:bold;spa">Tout </button>
+                            <div class="input-container">
+
+                                <div class="input-wrapper">
+                                    <div class="date-picker-wrapper">
+                                        <input type="date" id="datePicker" onchange="filterByDate(this)" >
+                                    </div>
+                                </div>
+                            </div>
+                           
+                        </div>
+                        <h1 style="font-size: 20px;margin-top: 30px;font-weight: bolder">Aujourd’hui</h1>
+                        <div style="display: flex; justify-content:flex-start;align-items:center ;gap:100px;padding:20px 0">
+                           
+                            <div class="histor_auj">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Mesure</th>
+                                            <th>Débit</th>
+                                            <th>Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if ($averageDebitToday)
+                                        <tr>
+                                            <td>1</td>
+                                            <td><span class="status-delivered">{{$averageDebitToday}} </span></td>
+                                            <td>{{ date('Y-m-d') }} </td>
+                                        </tr>
+                                        @endif
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+    
                 
-         </div>
+            </div>
+        </div>
+        <h1 style="font-size: 20px;margin-left: 24px;font-weight: bolder">Récent</h1>
+
+  <div style="padding:15px 0">
+            
+    <div class="histor_auj1">
+              <table >
+                <thead>
+                    <tr>
+                        <th>Mesure</th>
+                        <th>Débit</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  @foreach ($averageDebitPrecedingDays as $data)
+                  <tr>
+                      <td>1</td>
+                      <td> <span class="status-delivered"> {{ $data->average_debit }}</span></td>
+                      <td >{{ $data->date }}</td>
+                  </tr>
+                  @endforeach
+                </tbody>
+              </table>
+            </div>
+                 
     </div>
+    <nav>
+        {{ $averageDebitPrecedingDays->appends(['page' => $averageDebitPrecedingDays->currentPage()])->links() }}
+
+    </nav>
 
     <!-- =========== Scripts =========  -->
-    <script src="{{ asset('assets/js/main.js') }}"></script>    <script>
+    <script src="{{ asset('assets/js/main.js') }}"></script>    
+    <script>
+
+    var date = new Date();
+      var year = date.getFullYear();
+      var month = String(date.getMonth()+1).padStart(2,'0');
+      var todayDate = String(date.getDate()).padStart(2,'0');
+      var datePattern = year + '-' + month + '-' + todayDate;
+      document.getElementById("datePicker").value = datePattern;
+
+
 
         function confirmLogout() {
             if (confirm("Are you sure you want to log out?")) {
                 window.location.href = "{{ route('logout') }}";
             }
         }
+
+        function filterByDate(input) {
+        var selectedDate = input.value;
+        // Redirect to the same page with the selected date as a query parameter
+        window.location.href = '{{ route("history") }}?date=' + selectedDate;
+    }
+    function resetDate() {
+    
+        window.location.href = '{{ route("history") }}';
+    }
+
     
     </script>
 

@@ -8,7 +8,7 @@ use App\Http\Controllers\Profile_siteController;
 use App\Http\Controllers\ConsultController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\NotificationsController;
-Route::middleware('auth:client')->group(function () {
+Route::middleware('auth:client,admin')->group(function () {
     // Routes accessible only to authenticated users
 
     Route::view('/message', 'profile.message')->name('message');
