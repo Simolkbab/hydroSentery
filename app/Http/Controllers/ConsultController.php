@@ -19,7 +19,7 @@ class ConsultController extends Controller
     
         // Query sensor data for the last seven days
         $sensorDataLastWeek = SensorData::whereBetween('created_at', [$startDate, $endDate])->get();
-        $lastThreeSensorData = SensorData::orderBy('id', 'asc')->take(3)->get();
+        $lastThreeSensorData = SensorData::orderBy('id', 'desc')->take(3)->get();
  
         // Calculate average debit for each day
         $averageDebitPerOfEachDay = $sensorDataLastWeek->groupBy(function ($data) {

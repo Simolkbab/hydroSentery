@@ -8,12 +8,21 @@ use App\Http\Controllers\Profile_siteController;
 use App\Http\Controllers\ConsultController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\NotificationsController;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
+use App\Models\SensorData;
+use App\Models\Alert;
+use App\Models\Client;
+use App\Mail\AlertMail;
+
+
 Route::middleware('auth:client,admin')->group(function () {
     // Routes accessible only to authenticated users
 
     Route::view('/message', 'profile.message')->name('message');
     Route::get('/home', [HomeController::class, 'index'])->name('index');
     Route::get('/consult', [ConsultController::class, 'index'])->name('consult');
+    Route::post('/mark-as-read/{id}', [NotificationsController::class, 'markAsRead'])->name('mark-as-read');
    
 
     // Route pour afficher l'historique
@@ -45,14 +54,54 @@ Route::get("/", function () {
 
 
 Route::middleware('guest:client')->group(function () {
-    Route::get('/compte', [ProfileController::class, 'create'])->name('create');
-    Route::post('/compte', [ProfileController::class, 'store'])->name('store');
+   
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [AuthController::class, 'login']);
 });
 
+Route::middleware('auth:admin')->group(function () {
+
+    Route::get('/compte', [ProfileController::class, 'create'])->name('create');
+    Route::post('/compte', [ProfileController::class, 'store'])->name('store');
+});
 
 
+// Route::get('/test', function() {
+//     // Fetch the first alert for testing purposes
+//     $alert = Alert::first();
+
+//     if ($alert) {
+//         // Get all clients
+//         $clients = Client::all();
+
+//         $successEmails = [];
+//         $failedEmails = [];
+
+//         foreach ($clients as $client) {
+//             // Send the email to each client
+//             try {
+//                 Mail::to($client->email)->send(new AlertMail(
+//                     $alert->message,
+//                     $alert->created_at->format('d/m/Y'),
+//                     $alert->created_at->format('H:i')
+//                 ));
+//                 $successEmails[] = $client->email;
+//             } catch (\Exception $e) {
+//                 $failedEmails[] = $client->email . ' (Error: ' . $e->getMessage() . ')';
+//             }
+//         }
+
+//         return response()->json([
+//             'message' => 'Emails sent',
+//             'success' => $successEmails,
+//             'failed' => $failedEmails,
+//         ]);
+//     } else {
+//         return response()->json([
+//             'message' => 'No alert found.'
+//         ], 404);
+//     }
+// });
 // Route::post('/store-data', function(Request $request)
 // {
 //     // Retrieve data from the incoming request

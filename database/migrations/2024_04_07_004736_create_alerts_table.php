@@ -12,8 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('alerts', function (Blueprint $table) {
-            $table->string('loc');
             $table->id();
+             $table->string('client_id')->nullable();
+            $table->string('message');
             $table->timestamps();
         });
     }

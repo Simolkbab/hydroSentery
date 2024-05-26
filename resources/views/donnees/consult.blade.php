@@ -119,6 +119,8 @@
             <div class="cardBox" style="width: 100%">
                 @php
                 $colors = ['#75BBF2', '#9AC1FA', '#1D629F']; // Define an array of colors
+  
+
             @endphp
             
             @foreach ($lastThreeSensorData as $key => $sensorData)

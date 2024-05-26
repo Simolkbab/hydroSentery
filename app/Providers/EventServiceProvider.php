@@ -18,14 +18,17 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        'sensorData.differenceBelowThreshold' => [
+            'App\Http\Controllers\NotificationController@createAlert',
+        ],
     ];
 
     /**
      * Register any events for your application.
      */
-    public function boot(): void
+    public function boot()
     {
-        //
+        parent::boot();
     }
 
     /**

@@ -4,17 +4,17 @@ namespace App\Models;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Notifications\Notifiable;
 
 
 class Client extends  Authenticatable{
     
+    use HasFactory,Notifiable;
 
     public function alerts()
     {
         return $this->belongsToMany(Alert::class);
     }
-    use HasFactory;
     protected $fillable = [
         'client_id',
         'email',

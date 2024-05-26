@@ -11,14 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sensor_data', function (Blueprint $table) {
+        Schema::create('insertion_control', function (Blueprint $table) {
             $table->id();
-            $table->double('debit'); 
-            $table->double('difference')->nullable();
-            $table->unsignedBigInteger('client_id')->nullable(); // Add the client_id field
-            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
+            $table->boolean('allow_insertion')->default(true);
             $table->timestamps();
-    
         });
     }
 
@@ -27,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sensor_data');
+        Schema::dropIfExists('insertion_control');
     }
 };
