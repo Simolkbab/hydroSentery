@@ -1,15 +1,12 @@
 body{
-    margin: 0;
-    padding: 0;
+    display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
     font-family: sans-serif;
-    margin: 0;
-    height: 100vh;
-    /*background: linear-gradient(to right, #070c29, #081351, #1730c1);*/
-    background: url("../images/pic.png") no-repeat center / cover;
-    background-size: 100%;
+    min-height: 100vh;
+    background: url("../images/pic.png") no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 *{
     font-family: "Poppins", sans-serif;
@@ -19,7 +16,7 @@ body{
 }
 .main{
     width: 600px;
-    height: 670px;
+    height: 670px; 
     overflow: hidden;
     /*background: linear-gradient(to right, #6d9176, #b1cab9, #bfc6c3);*/
     border-radius: 10px;
@@ -28,7 +25,7 @@ body{
     align-items: center; /* Centrer verticalement */
     margin: 0 auto;  /*Pour centrer horizontalement par rapport à la page */
     margin-top: 10px;
-    position: fixed;
+    /* position: fixed; */
     top: 0;
     left:30%;
     border: 2px solid rgba(255,255,255, .2);
@@ -72,7 +69,6 @@ input{
     padding-left: 20px;
     margin-left: 100px;
     font-weight:600 ;
-
 }
 .GoProfil a{
     text-decoration: none;
@@ -91,7 +87,6 @@ input{
     padding: 10px;
     background: #000;
     box-shadow:  5px 10px 10px #1a1a1a;
-    
 }
 .GoProfil:hover{
     background: #2f2e30;
@@ -131,4 +126,97 @@ button{
 }
 button:hover{
     background:#2f2e30 ;
+}
+@media screen and (max-width: 1000px){
+    body {
+        background: url("../images/pic.png") no-repeat center / cover;
+        background-size: cover; 
+    }
+    .main{
+        width: 750px;
+        height: 900px;
+        margin-top: 100px;
+        left:5%;
+    }
+    .signup div label{
+        margin-left: 130px;
+    }
+    
+}
+@media screen and (max-width: 830px){
+    body {
+        background: url("../images/pic.png") no-repeat center / cover;
+        background-size: cover; /* Assure que l'image de fond couvre tout l'écran */
+        overflow-y: scroll;
+    }
+    .main{
+        width: 700px;
+        height: 800px;
+        margin-top: 100px;
+        left:4%;
+    }
+    .GoProfil{
+        margin: 12px;        
+    }
+    
+    .signup div label{
+        margin-left: 120px;
+    }
+    
+}
+@media screen and (max-width: 440px){
+    body {
+        background: url("../images/pic.png") no-repeat center / cover;
+        background-size: cover; /* Assure que l'image de fond couvre tout l'écran */
+        overflow-y: scroll;
+    }
+    
+    .main{
+        width: 360px;
+        margin-top: 100px;
+        left:4%;
+    }
+    .GoProfil{
+        margin: 12px;        
+    }
+    .erreur , .signup p{
+        margin-left: 40px;
+    }
+    .signup div label{
+        margin-left: 60px;
+        font-weight:600 ;
+    }
+    input{
+        margin: 10px auto;
+        padding: 10px;
+        border: 6px outset #000;
+        outline: none;
+        border-radius: 5px;
+    }   
+}
+@media screen and (max-width: 340px){
+    body {
+        background: url("../images/pic.png") no-repeat center / cover;
+        background-size: cover; /* Assure que l'image de fond couvre tout l'écran */
+        overflow-y: scroll;
+    }
+    .signup div label{
+        margin-left: 50px;
+        font-weight:600 ;
+    }
+    .main{
+        width: 300px;
+        margin-top: 100px;
+        margin-bottom: 200px;
+        left:4%;
+
+    }
+    input{
+        width: 240px;
+        margin: 10px auto;
+        padding: 10px;
+        border: 6px outset #000;
+        outline: none;
+        border-radius: 5px;
+    }
 }

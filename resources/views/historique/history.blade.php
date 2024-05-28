@@ -242,7 +242,7 @@
             </div>
 
             <!-- ======================= Cards ================== -->
-            <div class="section_white">
+            <div class="section_white" style="padding-bottom: 100px;">
                 <div style="padding:20px 25px">
                     <div style="margin-bottom:10px">
 

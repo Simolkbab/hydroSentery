@@ -141,9 +141,10 @@
                         </li>
                         <hr>
                         <li> 
+                           
                             <label for="password">mot de passe</label>
                             <p  id="password-stars" class="content">{{ str_repeat("*", ($user->password_length)) }}</p>
-                            <button id="modifier-password" class="buttons"><a href="{{ route('editPassword') }}"><b>Modifier</b></a></button>
+                            <button ><a href="{{ route('editPassword') }}"><b>Modifier</b></a></button>
                         </li>
                         <hr>
                     </ul>

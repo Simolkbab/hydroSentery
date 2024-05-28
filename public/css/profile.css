@@ -214,12 +214,15 @@ body {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 10px;
+
 }
 
 .informations button {
   flex: 0.5;
   margin-left: 150px;
   padding: 4px 20px;
+  
+  
   background-color: #98BEFD;
   border: 4px outset #98BEFD;
   border-radius: 5px;

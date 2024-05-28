@@ -14,7 +14,23 @@ use App\Models\SensorData;
 use App\Models\Alert;
 use App\Models\Client;
 use App\Mail\AlertMail;
+use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\ClientController;
 
+
+Route::prefix('admin')->group(function () {
+    Route::get('login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
+    Route::post('login', [AdminAuthController::class, 'login'])->name('admin.login.submit');
+    Route::post('logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
+    Route::get('index', [ClientController::class, 'index'])->name('profile.index')->middleware('auth:admin');
+    
+Route::patch('clients/{id}', [ClientController::class, 'update'])->name('clients.update');
+
+    Route::get('clients/create', [ClientController::class, 'create'])->name('clients.create');
+    Route::post('clients', [ClientController::class, 'store'])->name('clients.store');
+    Route::get('clients/{id}/edit', [ClientController::class, 'edit'])->name('clients.edit');
+    Route::delete('clients/{id}', [ClientController::class, 'destroy'])->name('clients.destroy');
+});
 
 Route::middleware('auth:client,admin')->group(function () {
     // Routes accessible only to authenticated users
@@ -61,8 +77,8 @@ Route::middleware('guest:client')->group(function () {
 
 Route::middleware('auth:admin')->group(function () {
 
-    Route::get('/compte', [ProfileController::class, 'create'])->name('create');
-    Route::post('/compte', [ProfileController::class, 'store'])->name('store');
+    Route::get('/compte', [ProfileController::class, 'create'])->name('clients.create');
+    Route::post('/compte', [ProfileController::class, 'store'])->name('clients.store');
 });
 
 

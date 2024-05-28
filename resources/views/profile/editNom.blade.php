@@ -20,47 +20,46 @@
     </a>
   </div>
   <div class="main">
-    
-    <div class="signup">
-      <form action="{{ route('UpdateNom') }}" method="POST">
-          <label for="chk" aria-hidden="true" class="title">Modifier le nom de Client</label>
-          @csrf
-          @method('PATCH')
-          <div>
-            <label for="password">Mot de passe actuel:</label>
-            <input type="password" name="password" id="password" required>  
-          </div>
-          <div>
-            <label for="current_name">Ancien Nom:</label>
-            <input type="text" name="current_name" id="current_name" required>
-          </div>
-          <div>
-            <label for="nomClient">Nouvel Nom:</label>
-            <input type="text" id="nomClient" name="nomClient" value="{{ old('nomClient') }}" required>
-          </div>
-          <div>
-            <label for="confirm_name">Confirmer Nom:</label>
-            <input type="text" name="confirm_name" id="confirm_name" required>
-          </div>
-          <button type="submit">Mettre à jour</button>
-        </form>
-        
-        @if ($errors->any())
-        <div class="erreur">
-                @foreach ($errors->all() as $error)
-                    <b>{{ $error }}</b>
-                @endforeach
-        </div>
-        @endif
+      <div class="signup">
+          <form action="{{ route('updateEmail') }}" method="POST">
+              <label for="chk" aria-hidden="true" class="title">Modifier l'e-mail</label>
+              @csrf
+              @method('PATCH')
+              <div>
+                  <label for="password">Mot de passe actuel:</label>
+                  <input type="password" name="password" id="password" required>  
+              </div>
+              <div>
+                  <label for="current_email">Ancien Email:</label>
+                  <input type="email" name="current_email" id="current_email" required>
+              </div>
+              <div>
+                  <label for="email">Nouvel Email:</label>
+                  <input type="email" id="email" name="email" value="{{ old('email') }}" required>
+              </div>
+              <div>
+                  <label for="confirm_email">Confirmer Email:</label>
+                  <input type="email" name="confirm_email" id="confirm_email" required>
+              </div>
+              <button type="submit">Mettre à jour</button>
+          </form>
+          
+          @if ($errors->any())
+              <div class="erreur">
+                      @foreach ($errors->all() as $error)
+                          <b>{{ $error }}</b>
+                      @endforeach
+              </div>
+          @endif
 
-        @if(session('error'))
-            <p style="color: red;">{{ session('error') }}</p>
-        @endif
+          @if(session('error'))
+              <p style="color: red;">{{ session('error') }}</p>
+          @endif
 
-        @if(session('success'))
-            <p style="color: green;">{{ session('success') }} <i class='bx bxs-check-circle'></i></p>
-        @endif
-    </div> 
- </div>
+          @if(session('success'))
+              <p style="color: green;">{{ session('success') }} <i class='bx bxs-check-circle'></i></p>
+          @endif
+     </div>  
+  </div>
 </body>
 </html>

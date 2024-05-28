@@ -14,7 +14,7 @@
 </head>
 <body>
     <div class="wrapper">
-        <form method="POST" action="{{ route('store') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('clients.store') }}" enctype="multipart/form-data">
             @csrf
             <h1>create users</h1>
             <div class="input_box">

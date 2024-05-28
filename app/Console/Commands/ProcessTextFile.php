@@ -54,7 +54,7 @@ class ProcessTextFile extends Command
                             'client_id' => 1,
                             'message' => 'Différence au-dessus du seuil : ' . $difference,
                         ]);
-
+                        broadcast(new AlertCreated($alert));
                         // Fetch the client and send the email
                         $client = Client::find($alert->client_id);
                         if ($client) {

@@ -200,9 +200,9 @@
                     <a href="{{ route('notification') }}" class="home">
                         <span class="icon" style="position: relative;">
                             <ion-icon name="notifications-outline"></ion-icon>
-                            @if($unreadCount > 0)
+                            {{-- @if($unreadCount > 0)
                                 <span class="badge">{{ $unreadCount }}</span>
-                            @endif
+                            @endif --}}
                         </span>
                         <span class="title">Notification</span>
                     </a>
@@ -327,6 +327,46 @@ window.onclick = function(event) {
             modal.style.display = "none";
         }
     }
+
+    window.Echo.channel('alerts')
+        .listen('AlertCreated', (e) => {
+            // Add new notification to the list
+            let notificationList = document.getElementById('notifications');
+            let newNotification = `
+                <div class="notification">
+                    <div class="notification-icon">
+                        <img src="{{ asset('images/alert.png') }}" width="50" height="50" alt="Alert Icon">
+                    </div>
+                    <div class="notification-content">
+                        <p>${e.message.substring(0, 50)}</p>
+                        <button class="show-more-button" onclick="showModal('alertModal${e.id}', ${e.id})">Afficher plus</button>
+                    </div>
+                </div>
+                <div id="alertModal${e.id}" class="modal">
+                    <div class="modal-content">
+                        <span class="modal-close" onclick="closeModal('alertModal${e.id}')">&times;</span>
+                        <h1>Notification d'alerte</h1>
+                        <div class="modal-body">
+                            <div class="alert" role="alert">
+                                <p>Une fuite a été détectée dans le réseau de distribution d'eau le ${e.created_at} à ${e.created_at}. Veuillez prendre les mesures nécessaires pour inspecter et réparer la fuite afin de prévenir tout dommage supplémentaire.</p>
+                                <p><strong>Message :</strong> ${e.message}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            notificationList.insertAdjacentHTML('afterbegin', newNotification);
+            
+            // Update the badge count
+            let badge = document.querySelector('.badge');
+            if (badge) {
+                let count = parseInt(badge.textContent, 10) + 1;
+                badge.textContent = count;
+            } else {
+                let notificationIcon = document.querySelector('.home .icon');
+                notificationIcon.insertAdjacentHTML('beforeend', `<span class="badge">1</span>`);
+            }
+        });
 }
 
 
