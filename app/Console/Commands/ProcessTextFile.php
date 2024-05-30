@@ -49,7 +49,7 @@ class ProcessTextFile extends Command
                     ]);
 
                     // Si la différence est supérieure à 9 et les alertes sont autorisées
-                    if ($difference > 9 && $insertionAllowed) {
+                    if ($difference > 3 && $insertionAllowed) {
                         $alert = Alert::create([
                             'client_id' => 1,
                             'message' => 'Différence au-dessus du seuil : ' . $difference,
